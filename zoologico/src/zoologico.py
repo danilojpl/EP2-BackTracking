@@ -7,7 +7,6 @@ class Restricaozoologico(Restricao):
         self.variaveis = [a1, a2, a3, a4]
 
     def esta_satisfeita(self, atribuicao):
-        # se nenhum dos as está com cor atribuída, está satisfeito
         if not all(variavel in atribuicao for variavel in self.variaveis):
               return True
         valores = [atribuicao[variavel] for variavel in self.variaveis]
@@ -19,9 +18,9 @@ class rei(Restricao):
         self.a1 = a1
 
     def esta_satisfeita(self, atribuicao):
-        # se nenhum dos as está com cor atribuída, está satisfeito
         if self.a1 not in atribuicao:
               return True
+        #leão na jaula 1
         return atribuicao[self.a1] == 1
 
 class amigos(Restricao):
@@ -30,10 +29,9 @@ class amigos(Restricao):
         self.variaveis = [a1, a2]
 
     def esta_satisfeita(self, atribuicao):
-        # se nenhum dos as está com cor atribuída, está satisfeito
         if not all(variavel in atribuicao for variavel in self.variaveis):
               return True
-        # cores de as vizinhos não podem ser igual 
+        #não podem ficar na mesma jaula
         return atribuicao[self.variaveis[0]] != atribuicao[self.variaveis[1]]
 
 class vizinhos(Restricao):
@@ -42,10 +40,9 @@ class vizinhos(Restricao):
         self.variaveis = [a1, a2]
 
     def esta_satisfeita(self, atribuicao):
-        # se nenhum dos as está com cor atribuída, está satisfeito
         if not all(variavel in atribuicao for variavel in self.variaveis):
               return True
-        # cores de as vizinhos não podem ser igual 
+        # não podem ser adjacentes  
         return (atribuicao[self.variaveis[1]] != atribuicao[self.variaveis[0]]+1) and (atribuicao[self.variaveis[1]] != atribuicao[self.variaveis[0]]-1)
 
 

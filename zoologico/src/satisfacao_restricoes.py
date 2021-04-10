@@ -9,7 +9,6 @@ class SatisfacaoRestricoes():
   def __init__(self, variaveis, dominios):
     self.variaveis = variaveis # Variáveis para serem restringidas
     self.dominios = dominios # Domínio de cada variável
-    self.check = False
     self.save = ""
     self.restricoes = {}
     for variavel in self.variaveis:
@@ -37,7 +36,6 @@ class SatisfacaoRestricoes():
     variaveis_nao_atribuida  = [v for v in self.variaveis if v not in atribuicao]
 
     for variavel in variaveis_nao_atribuida:
-#        variavel.update(possiveis)
         listval = {variavel:valores_list[0]}
         possiveis.update(listval)
         if self.esta_consistente(variavel,possiveis) == False:
@@ -45,15 +43,11 @@ class SatisfacaoRestricoes():
             self.dominios[variavel].remove(valores_list[0])
             possiveis.pop(variavel)
           else:
-            break;
+            break
             
                 
-          
-
                   
   def busca_backtracking(self, atribuicao = {}):
-    # retorna sucesso quando todas as variáveis forem atribuídas
-    
     menor = 5
     if len(atribuicao) == len(self.variaveis):
       return atribuicao
@@ -62,11 +56,10 @@ class SatisfacaoRestricoes():
     variaveis_nao_atribuida  = [v for v in self.variaveis if v not in atribuicao]
     primeira_variavel = variaveis_nao_atribuida[0]
 
-
+    #MRV pega a variavel com menos domínios 
     if len(atribuicao)!=0:
       self.forward(self.save,atribuicao)
       for val in variaveis_nao_atribuida:
-      #for i in self.dominios:
         if(len(self.dominios[val])<menor):
           primeira_variavel = val
           menor = len(self.dominios[val])
