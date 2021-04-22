@@ -39,7 +39,7 @@ class SatisfacaoRestricoes():
         listval = {variavel:valores_list[0]}
         possiveis.update(listval)
         if self.esta_consistente(variavel,possiveis) == False:
-          if (len(valores_list) != 1):
+          if (len(self.dominios[variavel]) != 1):
             self.dominios[variavel].remove(valores_list[0])
             possiveis.pop(variavel)
           else:
